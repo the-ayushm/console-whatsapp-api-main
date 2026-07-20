@@ -175,6 +175,9 @@ class ContactService {
       throw new HTTP404Error({ message: 'Contact not found' });
     }
 
+    // Delete related contact_assignments first to avoid FK constraint violation
+    await contactAssignmentModel.deleteByContactId(contactId);
+
     await ContactModel.delete(contactId);
   }
 

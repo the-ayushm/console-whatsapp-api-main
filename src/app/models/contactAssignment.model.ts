@@ -14,6 +14,10 @@ class ContactModel extends BaseModel {
     return this.query().where('contact_id',contactId).returning("*")
   }
 
+  async deleteByContactId(contactId: string) {
+    return this.query().where({ contact_id: contactId }).del();
+  }
+
 }
 
 export default new ContactModel()
